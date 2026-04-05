@@ -1,5 +1,8 @@
 torch>=2.0
 gymnasium>=0.29
+gymnasium[atari]>=0.29
+ale-py>=0.8
 matplotlib>=3.7
 numpy>=1.24
 imageio>=2.31
+pygame>=2.5
