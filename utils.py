@@ -117,15 +117,17 @@ def create_agent_gif(agent, filepath='agent_pong.gif', n_frames=500):
     """Crea un GIF del agente entrenado jugando Pong."""
     import imageio
     import gymnasium as gym
-    from gymnasium.wrappers import AtariPreprocessing, FrameStack
+    from gymnasium.wrappers import AtariPreprocessing, FrameStackObservation
+    import ale_py
+    gym.register_envs(ale_py)
 
-    # Env sin render para observaciones del agente
-    env_agent = gym.make("ALE/Pong-v5", render_mode="rgb_array")
-    env_agent = AtariPreprocessing(env_agent, noop_max=30, frame_skip=4,
+    # Env con rgb_array para capturar frames + preprocessing para el agente
+    env_rgb = gym.make("ALE/Pong-v5", render_mode="rgb_array", frameskip=1)
+    env_agent = AtariPreprocessing(env_rgb, noop_max=30, frame_skip=4,
                                    screen_size=84, terminal_on_life_loss=False,
                                    grayscale_obs=True, grayscale_newaxis=False,
                                    scale_obs=False)
-    env_agent = FrameStack(env_agent, num_stack=4)
+    env_agent = FrameStackObservation(env_agent, stack_size=4)
 
     # Wrapper de acciones inline
     action_map = {0: 0, 1: 2, 2: 3}
@@ -144,7 +146,7 @@ def create_agent_gif(agent, filepath='agent_pong.gif', n_frames=500):
         state, _, terminated, truncated, _ = env_agent.step(env_action)
 
         if terminated or truncated:
-            break
+            state, _ = env_agent.reset()
 
     env_agent.close()
 

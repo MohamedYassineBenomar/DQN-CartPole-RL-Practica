@@ -18,12 +18,12 @@ class DQNConfig:
     lr: float = 1e-4
     gamma: float = 0.99
     epsilon_start: float = 1.0
-    epsilon_end: float = 0.02
+    epsilon_end: float = 0.05
     epsilon_decay_steps: int = 100_000
     buffer_size: int = 100_000
     batch_size: int = 32
     target_update_freq: int = 1_000
-    total_steps: int = 500_000
+    total_steps: int = 1_000_000
     min_buffer_size: int = 10_000
     train_frequency: int = 4
     grad_clip: float = 10.0

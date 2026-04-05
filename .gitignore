@@ -1,8 +1,6 @@
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
-*.pth
+models/*_checkpoint.pth
 agent_playing.gif
-models/
 venv/
-.claude/

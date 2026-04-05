@@ -21,7 +21,7 @@ from environment import make_pong_env
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Train DQN agent on Atari Pong")
-    parser.add_argument("--total-steps", type=int, default=500_000)
+    parser.add_argument("--total-steps", type=int, default=1_000_000)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--render", action="store_true")
     parser.add_argument("--checkpoint-every", type=int, default=50_000, help="Save every N steps")
